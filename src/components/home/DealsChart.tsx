@@ -4,14 +4,14 @@ import { useList } from "@refinedev/core";
 import { GetFieldsFromList } from "@refinedev/nestjs-query";
 
 import { DollarOutlined } from "@ant-design/icons";
-import { Area, AreaConfig } from "@ant-design/plots";
 import { Card } from "antd";
-
+import { Area, AreaConfig } from "@ant-design/plots";
 import { DashboardDealsChartQuery } from "@/graphql/types";
 import { DASHBOARD_DEALS_CHART_QUERY } from "@/graphql/queries";
 import { Text } from "../Text";
+import { mapDealsData } from "./utils";
 
-export const DashboardDealsChart = () => {
+const DealsChart = () => {
   const { data } = useList<GetFieldsFromList<DashboardDealsChartQuery>>({
     resource: "dealStages",
     filters: [{ field: "title", operator: "in", value: ["WON", "LOST"] }],
@@ -86,3 +86,4 @@ export const DashboardDealsChart = () => {
     </Card>
   );
 };
+export default DealsChart;

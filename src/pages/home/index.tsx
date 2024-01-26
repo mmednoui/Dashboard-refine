@@ -12,7 +12,7 @@ import {
 } from "../../components";
 import { DASHBOARD_TOTAL_COUNTS_QUERY } from "@/graphql/queries";
 
-export const DashboardPage = () => {
+export const Home = () => {
   const { data, isLoading } = useCustom<DashboardTotalCountsQuery>({
     url: "",
     method: "get",

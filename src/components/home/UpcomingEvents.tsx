@@ -9,7 +9,7 @@ import { DashboardCalendarUpcomingEventsQuery } from "@/graphql/types";
 import { DASHBORAD_CALENDAR_UPCOMING_EVENTS_QUERY } from "@/graphql/queries";
 import { Text } from "../Text";
 
-export const CalendarUpcomingEvents = () => {
+const UpcomingEvents = () => {
   const { data, isLoading } = useList<
     GetFieldsFromList<DashboardCalendarUpcomingEventsQuery>
   >({
@@ -141,3 +141,4 @@ const NoEvent = () => (
     No Upcoming Event
   </span>
 );
+export default UpcomingEvents;

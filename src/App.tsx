@@ -11,16 +11,17 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import { App as AntdApp } from "antd";
-import { Home, ForgotPassword, Register, Login } from "./pages";
+import { Home, ForgotPassword, Register, Login, CompanyList } from "./pages";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { dataProvider, liveProvider, authProvider } from "./providers";
 import { Layout } from "./components/layout";
 import { Resources } from "./config/Resources";
+import { CompanyCreate } from "./pages/companies/CompanyCreate";
+import { CompanyEdit } from "./pages/companies/CompanyEdit";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <AntdApp>
           <DevtoolsProvider>
@@ -57,12 +58,16 @@ function App() {
                 >
                   <Route index element={<Home />} />
                 </Route>
+                <Route path="/companies">
+                  <Route index element={<CompanyList />} />
+                  <Route path="new" element={<CompanyCreate />} />
+                  <Route path="edit/:id" element={<CompanyEdit />} />
+                </Route>
               </Routes>
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
-            <DevtoolsPanel />
           </DevtoolsProvider>
         </AntdApp>
       </RefineKbarProvider>
