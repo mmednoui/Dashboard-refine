@@ -18,6 +18,9 @@ import { Layout } from "./components/layout";
 import { Resources } from "./config/Resources";
 import { CompanyCreate } from "./pages/companies/CompanyCreate";
 import { CompanyEdit } from "./pages/companies/CompanyEdit";
+import { TasksList } from "./pages/tasks/TaskList";
+import { TasksEdit } from "./pages/tasks/TaskEdit";
+import { TasksCreate } from "./pages/tasks/TaskCreate";
 
 function App() {
   return (
@@ -41,9 +44,6 @@ function App() {
               }}
             >
               <Routes>
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route
                   element={
                     <Authenticated
@@ -57,12 +57,36 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
+
+                  <Route
+                    path="/tasks"
+                    element={
+                      <TasksList>
+                        <Outlet />
+                      </TasksList>
+                    }
+                  >
+                    <Route path="new" element={<TasksCreate />} />
+                    <Route path="edit/:id" element={<TasksEdit />} />
+                  </Route>
+
+                  <Route path="/companies">
+                    <Route index element={<CompanyList />} />
+                    <Route path="new" element={<CompanyCreate />} />
+                    <Route path="edit/:id" element={<CompanyEdit />} />
+                  </Route>
+
+                  <Route path="*" element={<ErrorComponent />} />
                 </Route>
-                <Route path="/companies">
-                  <Route index element={<CompanyList />} />
-                  <Route path="new" element={<CompanyCreate />} />
-                  <Route path="edit/:id" element={<CompanyEdit />} />
-                </Route>
+
+                <Route
+                  element={
+                    <Authenticated
+                      key="authenticated-auth"
+                      fallback={<Outlet />}
+                    ></Authenticated>
+                  }
+                ></Route>
               </Routes>
               <RefineKbar />
               <UnsavedChangesNotifier />
